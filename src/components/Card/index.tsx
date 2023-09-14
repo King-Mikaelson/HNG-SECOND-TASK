@@ -3,8 +3,7 @@ import { MdArrowForwardIos } from "react-icons/md";
 import LoadingIndicator from "../LoadingIndicator";
 import Image from "next/image";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: Movie[];
@@ -37,9 +36,45 @@ const Card = ({
   filteredData,
   loading,
 }: Props) => {
-  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+  return (
+    <main className=" px-6 xl:px-24  py-20" data-testid="movie-card">
+      <div>
+        <div className="flex justify-between items-center">
+          <h2 className="font-DMsans text-4xl font-bold text-[#000]">
+            Featured Movie
+          </h2>
+          <div className="flex gap-4 items-center">
+            <p className="text-[#BE123C] font-DMSans text-lg">See more</p>
+            <MdArrowForwardIos size={20} color="#BE123C" />
+          </div>
+        </div>
+      </div>
 
-  const router = useRouter()
+      {isPending || loading ? (
+        <LoadingIndicator />
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-12 mt-10 gap-y-23">
+          {((filteredData.length > 0 && filteredData) || data)
+            ?.slice(0, 10)
+            ?.map((item: Movie, index: number) => (
+              <CardDetails item={item} />
+            ))}
+        </div>
+      )}
+    </main>
+  );
+};
+
+export default Card;
+
+type PropsChild = {
+  item: any;
+};
+
+const CardDetails = ({ item }: PropsChild) => {
+  const router = useRouter();
+
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
 
   const genre = [
     {
@@ -125,94 +160,89 @@ const Card = ({
       arr.find((num: any) => num === item.id)
     );
     const result1 = result.map((item) => item.name);
-    return result1.map((item) => (
-      <p className=" font-DMSans text-xs text-[#9CA3AF] font-bold break-words">{`${item},`}</p>
-    ));
+    return result1.map((item, index) =>
+      result1[result1.length - 1] === item ? (
+        <p className=" font-DMSans text-xs text-[#9CA3AF] font-bold break-words">{`${item}`}</p>
+      ) : (
+        <p className=" font-DMSans text-xs text-[#9CA3AF] font-bold break-words">{`${item},`}</p>
+      )
+    );
   };
 
+  const handleFavourite = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    setIsFavourite((prevValue) => !prevValue);
+  };
 
   return (
-    <main className=" px-6 xl:px-24  py-20" data-testid="movie-card">
-      <div>
-        <div className="flex justify-between items-center">
-          <h2 className="font-DMsans text-4xl font-bold text-[#000]">
-            Featured Movie
-          </h2>
-          <div className="flex gap-4 items-center">
-            <p className="text-[#BE123C] font-DMSans text-lg">See more</p>
-            <MdArrowForwardIos size={20} color="#BE123C" />
-          </div>
+    <div key={item.id}>
+      <div
+        className="relative w-full"
+        onClick={() => router.push(`/movie/${item.id}`)}
+      >
+        <Image
+          src={`http://image.tmdb.org/t/p/original${item?.poster_path}`}
+          alt="movie poster"
+          width={500}
+          height={500}
+          className="w-full cursor-pointer"
+          data-testid="movie-poster"
+        />
+        <div
+          onClick={(e) => handleFavourite(e)}
+          className="bg-[rgba(243,244,246,0.5)] py-1 px-1 rounded-full absolute top-5 right-6"
+        >
+          {isFavourite ? (
+            <MdFavorite size={20} className=" text-red-700 cursor-pointer" />
+          ) : (
+            <MdFavorite size={20} className=" text-[#D1D5DB] cursor-pointer" />
+          )}
         </div>
       </div>
 
-      {isPending || loading ? (
-        <LoadingIndicator />
-      ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-12 mt-10 gap-y-23">
-          {((filteredData.length > 0 && filteredData) || data)
-            ?.slice(0, 10)
-            ?.map((item: Movie, index: number) => (
-              <div key={index}>
-                <div className="relative w-full" onClick={() => router.push(`/movie/${item.id}`)}>
-                  <Image
-                    src={`http://image.tmdb.org/t/p/original${item?.poster_path}`}
-                    alt="movie poster"
-                    width={500}
-                    height={500}
-                    className="w-full"
-                    data-testid="movie-poster"
-                  />
-                  <div className="bg-[rgba(243,244,246,0.5)] py-1 px-1 rounded-full absolute top-5 right-6">
-                    {isFavourite ? (
-                      <MdFavorite size={20} className=" text-[#D1D5DB]" />
-                    ) : (
-                      <MdFavoriteBorder size={20} className=" text-[#D1D5DB]" />
-                    )}
-                  </div>
-                </div>
+      <p
+        data-testid="movie-release-date"
+        className="py-3 font-DMSans text-xs text-[#9CA3AF] font-bold"
+      >
+        {item.release_date}
+      </p>
 
-                <p data-testid="movie-release-date" className="py-3 font-DMSans text-xs text-[#9CA3AF] font-bold">
-                  {item.release_date}
-                </p>
-
-                <div className="flex gap-4 flex-col">
-                  <p data-testid="movie-title" className="font-DMSans text-lg text-[#111827] font-bold">
-                    {item.title}
-                  </p>
-                  <div className="flex  justify-between">
-                    <div className="flex flex-row items-center  gap-2">
-                      <Image
-                        src="imdb.svg"
-                        alt="imdb logo"
-                        width={100}
-                        height={100}
-                        className="w-10"
-                      />
-                      <p className=" font-normal font-DMSans text-xs text-[#111827]">
-                        86.0 / 100
-                      </p>
-                    </div>
-                    <div className="flex flex-row items-center gap-2">
-                      <Image
-                        src="tomato.svg"
-                        alt="tomato"
-                        width={100}
-                        height={100}
-                        className="w-5"
-                      />
-                      <p className=" font-normal font-DMSans text-xs text-[#111827] ">
-                        97%
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex gap-2 ">{result(item?.genre_ids)}</div>
-                </div>
-              </div>
-            ))}
+      <div className="flex gap-4 flex-col">
+        <p
+          onClick={() => router.push(`/movie/${item.id}`)}
+          data-testid="movie-title"
+          className="font-DMSans text-lg text-[#111827] font-bold cursor-pointer"
+        >
+          {item.title}
+        </p>
+        <div className="flex  justify-between">
+          <div className="flex flex-row items-center  gap-2">
+            <Image
+              src="imdb.svg"
+              alt="imdb logo"
+              width={100}
+              height={100}
+              className="w-10"
+            />
+            <p className=" font-normal font-DMSans text-xs text-[#111827]">
+              86.0 / 100
+            </p>
+          </div>
+          <div className="flex flex-row items-center gap-2">
+            <Image
+              src="tomato.svg"
+              alt="tomato"
+              width={100}
+              height={100}
+              className="w-5"
+            />
+            <p className=" font-normal font-DMSans text-xs text-[#111827] ">
+              97%
+            </p>
+          </div>
         </div>
-      )}
-    </main>
+        <div className="flex gap-2 ">{result(item?.genre_ids)}</div>
+      </div>
+    </div>
   );
 };
-
-export default Card;

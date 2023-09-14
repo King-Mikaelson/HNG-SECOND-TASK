@@ -1,12 +1,16 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { GoHome } from "react-icons/go";
 import { BiCameraMovie } from "react-icons/bi";
 import { TbLogout } from "react-icons/tb";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 export const Dashboard = (props: Props) => {
+
+  const[active, setActive] = useState("movies")
+  const router = useRouter()
   return (
     <div className="pt-4 flex flex-col justify-bewtween h-full  w-full">
       <div className="px-6">
@@ -19,26 +23,36 @@ export const Dashboard = (props: Props) => {
       />
       </div>
 
-      <div className="grid grid-cols-1 w-full mt-12 ">
-        <div className="flex gap-4 items-center my-5 px-6">
+      <div className="grid grid-cols-1  gap-12 w-full mt-12 mb-8 ">
+
+      <div className={`${active === "home" ? "flex items-center text-[#BE123C] active__parent  bg-[rgba(190,18,60,0.10)] transition duration-500" : "text-[#666] transition duration-0"}`} onClick={() => {setActive("home"); router.push("/")}}>
+      <div className="flex gap-4 items-center px-6">
           <GoHome size={30} color="#666" />
           <p className="font-poppins text-xl font-medium text-[#666]">Home</p>
         </div>
-        <div className="flex gap-4 text-[#BE123C]  my-5 bg-[rgba(190,18,60,0.10)] w-full px-6 py-6">
+      </div>
+
+        <div onClick={() => setActive("movies")} className={`${active === "movies" ? "flex items-center text-[#BE123C] active__parent  bg-[rgba(190,18,60,0.10)] transition duration-500" : "text-[#666] transition duration-0"}`}>
+        <div  className="flex gap-4 items-center  px-6">
           <BiCameraMovie size={30} color="#666" />
           <p className="font-poppins text-xl font-medium ">Movies</p>
         </div>
+        </div>
 
-        <div className="flex gap-4 items-center my-5 px-6">
+      <div className={`${active === "series" ? "flex items-center text-[#BE123C] active__parent  bg-[rgba(190,18,60,0.10)] transition duration-500" : "text-[#666] transition duration-0"}`} onClick={() => setActive("series")}>
+      <div className="flex gap-4 items-center px-6">
           <Image src="/tvShow.svg" alt="tv show" width={300} height={300} className="w-8"/>
-          <p className="font-poppins text-xl font-medium text-[#666] whitespace-nowrap">TV Series</p>
+          <p className="font-poppins text-xl font-medium  whitespace-nowrap">TV Series</p>
         </div>
-        <div className="flex gap-4 items-center my-5  px-6">
+      </div>
+
+      <div className={`${active === "upcoming" ? "flex items-center text-[#BE123C] active__parent  bg-[rgba(190,18,60,0.10)] transition duration-500" : "text-[#666] transition duration-0"}`} onClick={() => setActive("upcoming")}>
+      <div className="flex gap-4 items-center px-6">
         <Image src="/calendar.svg" alt="tv show" width={300} height={300} className="w-8"/>
-          <p className="font-poppins text-xl font-medium text-[#666]">Upcoming</p>
+          <p className="font-poppins text-xl font-medium ">Upcoming</p>
         </div>
-        <div></div>
-        <div></div>
+      </div>
+
       </div>
 
       <div className="flex flex-col px-3 mx-6 pt-10 pb-4 gap-2   rounded-[1.25rem] border solid border-[rgba(190,18,60,0.70)] bg-[rgba(248,231,235,0.4)]">

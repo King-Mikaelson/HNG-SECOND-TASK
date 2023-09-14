@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import Card from "@/components/Card";
 import { DM_Sans, Poppins } from "next/font/google";
+import { Footer } from "@/components/Footer";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -119,6 +120,7 @@ export default function Home() {
         filterSearch={filterSearch}
         filteredData={filteredData}
       />
+      <Footer/>
     </main>
   );
 }

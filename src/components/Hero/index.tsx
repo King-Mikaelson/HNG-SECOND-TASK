@@ -61,7 +61,7 @@ const Hero = ({search,setSearch}:Props) => {
     </button>
     </div>
 
-    <div  className="flex    flex-col gap-1  absolute top-[40%] md:right-2 right-1 font-normal font-DMSans text-xs text-[#9CA3AF] items-center">
+    <div  className="flex  md:flex-col gap-1  absolute md:top-[40%] md:right-2  font-normal font-DMSans text-xs text-[#9CA3AF] items-center bottom-5 right-[40%]">
     <p>1</p>
     <p>2</p>
 

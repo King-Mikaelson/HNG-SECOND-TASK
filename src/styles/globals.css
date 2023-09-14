@@ -161,3 +161,15 @@ a {
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   backdrop-filter: blur(2px);
 }
+
+.active__parent{
+  width: 100%;
+}
+.active__parent::after{
+  content: "";
+  width: 4px;
+  height: 5rem;
+  background: #BE123C;
+  margin-left: auto;
+
+}
