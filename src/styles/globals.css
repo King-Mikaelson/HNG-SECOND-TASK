@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body {
   padding: 0;
@@ -35,7 +34,7 @@ a {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #3F5BF6;
+  background: #3f5bf6;
   margin: -4px 0 0 -4px;
 }
 .lds-roller div:nth-child(1) {
@@ -103,46 +102,62 @@ a {
   }
 }
 
-
 .dashboardlayout {
   display: grid;
   grid-template-columns: 215px 1fr;
   grid-template-rows: 70px 1fr;
   height: 100vh;
-  grid-template-areas: "nav main"
+  grid-template-areas:
+    "nav main"
     "nav  main";
   overflow-x: hidden;
-    background-color: #fff;
-
+  background-color: #fff;
 }
 
 .dashboardlayout .left {
-    flex: 0 0 250px;
-    grid-area: nav;
-    border-radius: 0rem 2.8125rem 2.8125rem 0rem;
-  border: 1px solid rgba(0, 0, 0, 0.30);
+  flex: 0 0 250px;
+  grid-area: nav;
+  border-radius: 0rem 2.8125rem 2.8125rem 0rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   background-color: #fff;
+}
 
-  }
-
-  .dashboardlayout .right {
-    flex: 1;
-    grid-area: main;
-    padding: 0rem;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    background-color: #fff;
-  }
-
+.dashboardlayout .right {
+  flex: 1;
+  grid-area: main;
+  padding: 0rem;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+}
 
 @media (max-width: 992px) {
-  .dashboardlayout{
-      grid-template-areas: "main main"
-        "main  main";
+  .dashboardlayout {
+    grid-template-areas:
+      "main main"
+      "main  main";
   }
 
   .dashboardlayout .left {
-      display: none;
+    display: none;
   }
 }
 
+.playDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 4;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play {
+  fill: rgba(255, 255, 255, 0.35);
+  stroke-width: 2px;
+  stroke: rgba(232, 232, 232, 0.2);
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+  backdrop-filter: blur(2px);
+}

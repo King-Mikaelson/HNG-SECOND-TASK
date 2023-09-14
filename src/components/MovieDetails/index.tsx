@@ -11,6 +11,8 @@ type Props = {
   credits: any;
 };
 
+import {FaPlay} from "react-icons/fa"
+
 function formatRuntime(minutes: number) {
   const hrs = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -34,6 +36,7 @@ function MovieDetails({ data, credits }: Props) {
   );
   return (
     <div className="pt-8 px-6">
+      <div className="relative">
       <Image
         priority={true}
         src={`http://image.tmdb.org/t/p/original${data?.backdrop_path}`}
@@ -42,10 +45,17 @@ function MovieDetails({ data, credits }: Props) {
         height={500}
         className="h-[60vh] w-full rounded-[1.25rem]"
       />
-      <div className="grid lg:grid-cols-2 xl:grid-cols-[1fr,400px] 2xl:grid-cols-2 grid-cols-1 mt-10 px-2">
+      <div className="playDiv cursor-pointer">
+      <div className="rounded-full play py-8 px-8">
+      <FaPlay size={30} className="text-white"/>
+      </div>
+      <p className="text-[#E8E8E8] text-[1.5625rem] font-poppins font-medium">Watch Trailer</p>
+      </div>
+      </div>
+      <div className="grid lg:grid-cols-2 xl:grid-cols-[1fr,350px] 2xl:grid-cols-2 grid-cols-1 mt-10 px-2">
         <div>
           <div className="flex gap-8 items-center overflow-scroll">
-            <p className="text-[#404040] lg:text-[1.4375rem] text-base font-poppins">
+            <p className="text-[#404040]  lg:text-[1.4375rem] text-base font-poppins">
               {data.title}
             </p>
             <ul className="flex gap-10 list-disc items-center">
@@ -62,7 +72,7 @@ function MovieDetails({ data, credits }: Props) {
 
             <div className="flex gap-4">
               {data.genres?.slice(0, 2).map((item: any) => (
-                <p className="rounded-[0.9375rem] text-[#B91C1C] border solid border-[#F8E7EB] py-1 px-2  lg:text-base text-sm font-poppins font-normal">
+                <p className="rounded-[0.9375rem] text-[#B91C1C] border solid border-[#F8E7EB] py-1 px-2 flex whitespace-nowrap items-center lg:text-base text-sm font-poppins font-normal">
                   {item.name}
                 </p>
               ))}
@@ -93,8 +103,8 @@ function MovieDetails({ data, credits }: Props) {
             ))}
           </div>
 
-          <div className="flex w-full items-center mt-3 rounded-[0.625rem] border ">
-            <p className="bg-[#BE123C] lg:w-[40%]  lg:py-3 lg:px-3 text-center border solid border-red-700 rounded-[0.625rem] text-white font-poppins text-xs lg:text-xl font-normal">
+          <div className="flex whitespace-nowrap overflow-scroll w-full items-center mt-3 rounded-[0.625rem] border ">
+            <p className="bg-[#BE123C] lg:w-[60%] xl:w-[40%]  lg:py-3 lg:px-3 text-center border solid border-red-700 rounded-[0.625rem] text-white font-poppins text-xs lg:text-xl font-normal">
               Top rated movie #65
             </p>
             <div className="lg:py-3 lg:px-6 w-full justify-around items-center">
