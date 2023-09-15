@@ -19,9 +19,16 @@ function formatRuntime(minutes: number) {
   return `${hrs}h ${mins}m`;
 }
 
-function getUtcTime(dateTime:any){
-  const date = new Date(dateTime).getUTCMilliseconds()
-  return date
+function getUtcTime(dateString:any){
+
+// Create a Date object with the time set to midnight (00:00:00)
+var date = new Date(dateString + "T00:00:00Z");
+
+// Get the UTC time in milliseconds
+var utcMilliseconds = date.getTime();
+
+return utcMilliseconds
+
 }
 
 function MovieDetails({ data, credits }: Props) {
@@ -63,13 +70,13 @@ function MovieDetails({ data, credits }: Props) {
             </p>
             <ul className="flex gap-10 list-disc items-center">
               <li data-testid="movie-release-date" className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm  font-poppins font-normal">
-                {data.release_date}
+                {getUtcTime(data.release_date)}
               </li>
               <li className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
                 PG 13
               </li>
               <li data-testid="movie-runtime" className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
-                {data.runtime}mins
+                {data.runtime}
               </li>
             </ul>
 
