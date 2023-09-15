@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react"
+import { ChangeEvent, Dispatch, SetStateAction} from "react"
 import {BiSearch} from "react-icons/bi"
 import {AiFillPlayCircle} from "react-icons/ai"
 
@@ -16,7 +16,6 @@ const Hero = ({search,setSearch}:Props) => {
     setSearch(e.target.value)
   }
 
-  console.log(search)
 
 
   return (

@@ -64,8 +64,7 @@ export default function Home() {
     };
 
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-      options
+      'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options,
     )
       .then((response) => {
         if (!response.ok) {
