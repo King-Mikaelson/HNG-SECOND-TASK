@@ -35,9 +35,14 @@ const Hero = ({search,setSearch}:Props) => {
     </div>
     </div>
 
+    <div className="bg-transparent flex md:hidden justify-between items-center  rounded-[0.375rem] border-2 solid border-[#D1D5DB] px-3 h-fit py-2 w-full mt-6">
+    <input value={search} onChange={(e) => handleSearch(e)} type="text" className="font-DMSans text-base  border-none outline-none text-white  w-full bg-transparent placeholder:text-white placeholder:text-base placeholder:font-DMSans"   placeholder="What do you want to watch?"/>
+    <BiSearch size={20} className="text-white" />
+    </div>
+
     <div className="flex justify-between m-auto mx-0 items-center">
     <div className="flex  flex-col gap-4">
-    <h1 className="md:w-[11ch] leading-10 font-bold font-DMSans text-5xl text-white ">John Wick 3 : Parabellum</h1>
+    <h1 className="md:w-[11ch] leading-10 font-bold font-DMSans lg:text-5xl text-3xl text-white ">John Wick 3 : Parabellum</h1>
 
 
     <div className="flex text-white  gap-10">

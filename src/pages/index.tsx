@@ -105,13 +105,10 @@ export default function Home() {
   useEffect(() => {
     filterSearch();
   }, [search]);
-  console.log(loading);
 
-  console.log(filteredData);
 
-  // console.log(data,isPending)
   return (
-    <main className={` ${dmSans.className} ${poppins.className}`}>
+    <main className={`${dmSans.className} ${poppins.className}`}>
       <Hero search={search} setSearch={setSearch} />
       <Card
         isPending={isPending}

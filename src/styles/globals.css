@@ -132,14 +132,27 @@ a {
 }
 
 @media (max-width: 992px) {
-  .dashboardlayout {
+  /* .dashboardlayout {
     grid-template-areas:
       "main main"
       "main  main";
-  }
+  } */
 
-  .dashboardlayout .left {
+  /* .dashboardlayout .left {
     display: none;
+  } */
+
+
+  .dashboardlayout {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: 70px 1fr;
+    height: 100vh;
+    grid-template-areas:
+      "nav main"
+      "nav  main";
+    overflow-x: hidden;
+    background-color: #fff;
   }
 }
 

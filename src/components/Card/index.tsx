@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { MdArrowForwardIos } from "react-icons/md";
 import LoadingIndicator from "../LoadingIndicator";
 import Image from "next/image";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { MdFavorite,} from "react-icons/md";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -40,11 +40,11 @@ const Card = ({
     <main className=" px-6 xl:px-24  py-20" data-testid="movie-card">
       <div>
         <div className="flex justify-between items-center">
-          <h2 className="font-DMsans text-4xl font-bold text-[#000]">
+          <h2 className="font-DMsans lg:text-4xl text-lg font-bold text-[#000]">
             Featured Movie
           </h2>
-          <div className="flex gap-4 items-center">
-            <p className="text-[#BE123C] font-DMSans text-lg">See more</p>
+          <div className="flex lg:gap-4 gap-2 items-center">
+            <p className="text-[#BE123C] font-DMSans lg:text-lg text-base">See more</p>
             <MdArrowForwardIos size={20} color="#BE123C" />
           </div>
         </div>
@@ -57,7 +57,7 @@ const Card = ({
           {((filteredData.length > 0 && filteredData) || data)
             ?.slice(0, 10)
             ?.map((item: Movie, index: number) => (
-              <CardDetails item={item} />
+              <CardDetails item={item} key={index}/>
             ))}
         </div>
       )}
@@ -71,7 +71,7 @@ type PropsChild = {
   item: any;
 };
 
-const CardDetails = ({ item }: PropsChild) => {
+const CardDetails = ({ item,}: PropsChild) => {
   const router = useRouter();
 
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
@@ -241,7 +241,7 @@ const CardDetails = ({ item }: PropsChild) => {
             </p>
           </div>
         </div>
-        <div className="flex gap-2 ">{result(item?.genre_ids)}</div>
+        <div className="flex lg:gap-2 ">{result(item?.genre_ids)}</div>
       </div>
     </div>
   );

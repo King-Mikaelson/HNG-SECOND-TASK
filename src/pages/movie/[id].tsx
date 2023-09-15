@@ -90,7 +90,6 @@ const CardDetails = (props: Props) => {
         setError(err.message);
       })
   }, [id]);
-  console.log(data);
 
   {
     if (isPending) return <LoadingIndicator />;

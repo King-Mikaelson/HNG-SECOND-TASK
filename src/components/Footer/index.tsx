@@ -1,9 +1,8 @@
 import {AiFillFacebook, AiOutlineInstagram,AiFillYoutube,AiOutlineTwitter} from "react-icons/ai"
-type Props = {}
 
-export const Footer = (props: Props) => {
+export const Footer = () => {
   return (
-    <div className=" px-6 xl:px-24  py-20">
+    <div className=" px-6 xl:px-24  lg:py-20  pb-5">
     <div className="flex justify-center gap-10 lg:pb-4 pb-2">
     <AiFillFacebook size={30} className="text-[#111827]"/>
     <AiOutlineInstagram size={30} className="text-[#111827]"/>

@@ -19,13 +19,17 @@ function formatRuntime(minutes: number) {
   return `${hrs}h ${mins}m`;
 }
 
+function getUtcTime(dateTime:any){
+  const date = new Date(dateTime).getUTCMilliseconds()
+  console.log(date, dateTime)
+  return date
+}
+
 function MovieDetails({ data, credits }: Props) {
-  const imageLink = `http://image.tmdb.org/t/p/original${data?.backdrop_path}`;
 
   const Writers = credits?.crew?.filter(
     (item: any) => item.department === "Writing"
   );
-  console.log(Writers);
 
   const Directors = credits?.crew?.filter(
     (item: any) => item.job === "Director"
@@ -35,7 +39,7 @@ function MovieDetails({ data, credits }: Props) {
     (item: any) => item.known_for_department === "Acting"
   );
   return (
-    <div className="pt-8 px-6">
+    <div className="pt-8 px-4">
       <div className="relative">
       <Image
         priority={true}
@@ -43,7 +47,7 @@ function MovieDetails({ data, credits }: Props) {
         alt="movie poster"
         width={500}
         height={500}
-        className="h-[60vh] w-full rounded-[1.25rem]"
+        className="lg:h-[60vh] h-[30vh] w-full rounded-[1.25rem]"
       />
       <div className="playDiv cursor-pointer">
       <div className="rounded-full play py-8 px-8">
@@ -55,51 +59,51 @@ function MovieDetails({ data, credits }: Props) {
       <div className="grid lg:grid-cols-2 xl:grid-cols-[1fr,350px] 2xl:grid-cols-2 grid-cols-1 mt-10 px-2">
         <div>
           <div className="flex gap-8 items-center overflow-scroll">
-            <p className="text-[#404040]  lg:text-[1.4375rem] text-base font-poppins">
+            <p  data-testid="movie-title" className="text-[#404040] whitespace-nowrap md:whitespace-normal  lg:text-[1.4375rem] text-base font-poppins">
               {data.title}
             </p>
             <ul className="flex gap-10 list-disc items-center">
-              <li className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm  font-poppins font-normal">
-                {data.release_date}
+              <li data-testid="movie-release-date" className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm  font-poppins font-normal">
+                {getUtcTime(data.release_date)}
               </li>
               <li className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
                 PG 13
               </li>
-              <li className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
-                {formatRuntime(data.runtime)}
+              <li data-testid="movie-runtime" className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
+                {data.runtime}mins
               </li>
             </ul>
 
             <div className="flex gap-4">
-              {data.genres?.slice(0, 2).map((item: any) => (
-                <p className="rounded-[0.9375rem] text-[#B91C1C] border solid border-[#F8E7EB] py-1 px-2 flex whitespace-nowrap items-center lg:text-base text-sm font-poppins font-normal">
+              {data.genres?.slice(0, 2).map((item: any,index:number) => (
+                <p key={index} className="rounded-[0.9375rem] text-[#B91C1C] border solid border-[#F8E7EB] py-1 px-2 flex whitespace-nowrap items-center lg:text-base text-sm font-poppins font-normal">
                   {item.name}
                 </p>
               ))}
             </div>
           </div>
-          <p className="py-4 text-[#404040] lg:text-xl text-base font-poppins">
+          <p data-testid="movie-overview" className="py-4 text-[#404040] lg:text-xl text-base font-poppins">
             {data.overview}
           </p>
 
           <div className="flex gap-3  whitespace-nowrap overflow-scroll border solid border-[rgba(232,232,232,0.25)] py-4">
             <h4 className="font-poppins text-xl text-[#333]">Director :</h4>
-            {Directors?.map((item: any) => (
-              <p className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
+            {Directors?.map((item: any,index:number) => (
+              <p  key={index} className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
             ))}
           </div>
 
           <div className="flex gap-3 whitespace-nowrap overflow-scroll  border-b solid border-[rgba(232,232,232,0.25)] py-4">
             <h4 className="font-poppins text-xl text-[#333]">Writers :</h4>
-            {Writers?.slice(0, 4).map((item: any) => (
-              <p className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
+            {Writers?.slice(0, 4).map((item: any, index:number) => (
+              <p key={index} className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
             ))}
           </div>
 
           <div className="flex gap-3 whitespace-nowrap overflow-scroll border-b solid border-[rgba(232,232,232,0.25)] py-4">
             <h4 className="font-poppins text-xl text-[#333]">Stars :</h4>
-            {credits?.cast?.slice(0, 4).map((item: any) => (
-              <p className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
+            {credits?.cast?.slice(0, 4).map((item: any,index:number) => (
+              <p  key={index} className="font-poppins text-xl text-[#BE123C]">{item.name}</p>
             ))}
           </div>
 
