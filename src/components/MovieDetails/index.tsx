@@ -21,7 +21,6 @@ function formatRuntime(minutes: number) {
 
 function getUtcTime(dateTime:any){
   const date = new Date(dateTime).getUTCMilliseconds()
-  console.log(date, dateTime)
   return date
 }
 
@@ -64,7 +63,7 @@ function MovieDetails({ data, credits }: Props) {
             </p>
             <ul className="flex gap-10 list-disc items-center">
               <li data-testid="movie-release-date" className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm  font-poppins font-normal">
-                {getUtcTime(data.release_date)}
+                {data.release_date}
               </li>
               <li className="text-[#404040] whitespace-nowrap lg:text-[1.4375rem] text-sm font-poppins font-normal">
                 PG 13
