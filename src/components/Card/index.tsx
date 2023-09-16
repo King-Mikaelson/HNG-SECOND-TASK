@@ -37,7 +37,7 @@ const Card = ({
   loading,
 }: Props) => {
   return (
-    <main className=" px-6 xl:px-24  py-20" data-testid="movie-card">
+    <main className=" px-6 xl:px-24  py-20" >
       <div>
         <div className="flex justify-between items-center">
           <h2 className="font-DMsans lg:text-4xl text-lg font-bold text-[#000]">
@@ -175,7 +175,7 @@ const CardDetails = ({ item,}: PropsChild) => {
   };
 
   return (
-    <div key={item.id}>
+    <div key={item.id} data-testid="movie-card">
       <div
         className="relative w-full"
         onClick={() => router.push(`/movie/${item.id}`)}
