@@ -120,6 +120,7 @@ a {
   border-radius: 0rem 2.8125rem 2.8125rem 0rem;
   border: 1px solid rgba(0, 0, 0, 0.3);
   background-color: #fff;
+  overflow-y: scroll;
 }
 
 .dashboardlayout .right {

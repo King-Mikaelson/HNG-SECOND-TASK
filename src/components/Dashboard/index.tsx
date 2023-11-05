@@ -62,7 +62,7 @@ export const Dashboard = (props: Props) => {
         <button className="font-poppins flex justify-center items-center mx-auto font-medium text-xs text-[rgba(190,18,60,1)] w-fit h-fit py-2 px-4 rounded-[1.875rem] bg-[rgba(190,18,60,0.2)]">Start Playing</button>
       </div>
 
-      <div className="flex gap-6 items-center mt-12 lg:px-6 px-0">
+      <div className="flex gap-6 items-center mt-12 pb-6 lg:px-6 px-0">
         <TbLogout size={30} className="text-[#666]"/>
         <p className="font-poppins font-medium text-xl text-[#666] hidden lg:block">Log out</p>
       </div>
